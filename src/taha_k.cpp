@@ -26,7 +26,14 @@ void taha_k::ability1(Hero* ptTeam[] , Hero* ptEnemy[])
     }
     ptTeam[min_player]->heal(20);
     
-    
+    int enemy;
+    cout << "choose a player to damage(1-3): ";
+    cin >> enemy;
+    for(enemy < 0 || enemy > 3){
+        cout << "\nEnter correct number(1-3): ";
+        cin >> enemy;
+    }
+    ptEnemy[enemy]->takedamage(30);
 
 }
 
