@@ -11,6 +11,28 @@ taha_k::taha_k() :Hero("Taha kochike" , "Healer" , 500 , 3 , "<< All in their pl
 void taha_k::ability1(Hero* ptTeam[] , Hero* ptEnemy[]) 
 {
     cout << "\n   > Heal 40 HP to a random teammate & deal 40 damage to enemy" << endl;
+    int hp;
+    int min_hp ;
+    int min_player;
+    for (int i = 0; i < 3; i++)
+    {
+        hp = ptTeam[i]->get_hp();
+        if (min_hp >= hp)
+        {
+            min_hp = hp ;
+            min_player = i ;
+        }
+    }
+    ptTeam[min_player]->heal(20);
+
+    int enemy;
+    cout << "choose a player to damage(1-3): ";
+    cin >> enemy;
+    for(enemy < 0 || enemy > 3){
+        cout << "\nEnter correct number(1-3): ";
+        cin >> enemy;
+    }
+    ptEnemy[enemy]->takedamage(30);
 
 }
 
