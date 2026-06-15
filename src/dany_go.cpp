@@ -8,19 +8,19 @@ dany_go::dany_go() :Hero("Danny Golang" , "Defender" , 600 , 4 , "<< No one cros
 {
 }
 
-void dany_go::ability1(int Energy)
+void dany_go::ability1(Hero* ptTeam[] , Hero* ptEnemy[])
 {
-    cout << "\nability2 dany go \n";
+    
 }
 
-void dany_go::ability2(int Energy)
+void dany_go::ability2(Hero* ptTeam[] , Hero* ptEnemy[])
 {
-    cout << "\nability1 dany go \n";
+    
 }
 
-void dany_go::special_ablity(int Energy)
+void dany_go::special_ablity(Hero* ptTeam[] , Hero* ptEnemy[])
 {
-    cout << "\nspecial ability dany go\n";
+    
 }
 
 void dany_go::choice_ability() 

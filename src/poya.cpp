@@ -8,19 +8,19 @@ poya::poya() :Hero("poya kazhdom" , "Attacker" , 500 , 3 , "<< Did you see my bi
 {
 }
 
-void poya::ability1(int Energy)
+void poya::ability1(Hero* ptTeam[] , Hero* ptEnemy[])
 {
-    cout << "\nability1 poya \n";
+
 } 
     
-void poya::ability2(int Energy)
+void poya::ability2(Hero* ptTeam[] , Hero* ptEnemy[])
 {
-    cout << "\nability2 poya \n";
+
 }
     
-void poya::special_ablity(int Energy)
+void poya::special_ablity(Hero* ptTeam[] , Hero* ptEnemy[])
 {
-    cout << "\nspecial ability poya\n";
+
 }
 
 void poya::choice_ability() 

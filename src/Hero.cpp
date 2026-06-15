@@ -18,18 +18,18 @@ Hero::Hero(string n, string ro , int h ,int rage , string AngMas , int enerA1 , 
     enrSpecAbility = enerspac;
 }
 
-void Hero::Ability(int wAbility, int Energy)
+void Hero::Ability(int wAbility,  Hero* ptTeam[] , Hero* ptEnemy[])
 {
     switch (wAbility)
     {
         case 1:
-            ability1(Energy);
+            ability1(ptTeam , ptEnemy);
             break;
         case 2:
-            ability2(Energy);
+            ability2(ptTeam , ptEnemy);
             break;
         case 3:
-            special_ablity(Energy);
+            special_ablity(ptTeam , ptEnemy);
             break;
     }
 }

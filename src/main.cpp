@@ -43,12 +43,12 @@ int main()
             Hero* ptrTeamB[3];
             
             k.show_hero();
-            cout << teamA_name << endl ;
+            cout << teamA_name << endl;
             k.teamA.clear();
-            k.choice_heros(k.teamA, teamA_name , ptrTeamA);    
+            k.choice_heros(k.teamA, teamA_name , ptrTeamA);
                         
             k.show_hero();
-            cout << teamB_name << endl ;
+            cout << teamB_name << endl;
             k.teamB.clear();
             k.choice_heros(k.teamB, teamB_name , ptrTeamB);
             
@@ -76,7 +76,7 @@ int main()
                             ptTeam[i] = ptrTeamA[i];    
                             ptEnemy[i] = ptrTeamB[i];    
                             team.push_back(k.teamA[i]); 
-                            Enemy.push_back(k.teamA[i]);                       
+                            Enemy.push_back(k.teamB[i]);                       
                         }
                         
                     } 
@@ -89,7 +89,7 @@ int main()
                             ptTeam[i] = ptrTeamB[i];
                             ptEnemy[i] = ptrTeamA[i];    
                             team.push_back(k.teamB[i]);          
-                            Enemy.push_back(k.teamB[i]);                       
+                            Enemy.push_back(k.teamA[i]);                       
                         }
                         
                     }   
@@ -98,7 +98,7 @@ int main()
                     bool use = false;
                     int wHero;
                     int wAbility;
-                    while(energy > 0)
+                    while(energy > 1)
                     {
                         cout << "═══════════════════════════════════════════════════════════════════════════ \n";
                         cout << "              " << team_name << " TURN    { Energy : " << energy << " }" << endl;
@@ -113,7 +113,7 @@ int main()
 
                         cout << "0) End Turn" << endl;
 
-                        cout << "Enter Hero nember(1-3)(0 to End): ";
+                        cout << "Enter Hero number(1-3)(0 to End): ";
                         cin >> wHero;
 
                         if(wHero == 0){
@@ -125,14 +125,14 @@ int main()
                         {
                             if(wHero < 0 || wHero > 3)
                             {
-                                cout << "Enter a correct Hero nember(1-3)(0 to End): ";
+                                cout << "Enter a correct Hero number(1-3)(0 to End): ";
                                 cin >> wHero;
                                 if(wHero == 0){
                                     break;
                                 }
                             }
                             if(!ptTeam[wHero - 1]->checkalive() && wHero != 0)
-                            { 
+                            {
                                 cout << "☠️ This hero has been defeated!\nChoose another hero(0 to End): ";
                                 cin >> wHero;
                                 if(wHero == 0){
@@ -146,7 +146,7 @@ int main()
                             break;
                         }
 
-                        cout << "Enter Ability nember(1-3)(0 to End): ";
+                        cout << "Enter Ability number(1-3)(0 to End): ";
                         cin >> wAbility;
 
                         if(wAbility == 0){
@@ -158,7 +158,7 @@ int main()
                         {
                             if(wAbility < 0 || wAbility > 3)
                             {
-                                cout << "Enter a correct Ability nember(1-3)(0 to End): ";
+                                cout << "Enter a correct Ability number(1-3)(0 to End): ";
                                 cin >> wAbility;
                                 if(wAbility == 0){
                                     break;
@@ -198,7 +198,7 @@ int main()
 
                         energy -= ptTeam[wHero -1]->get_enerAbility(wAbility);
 
-                        ptTeam[wHero - 1]->Ability(wAbility , energy);
+                        ptTeam[wHero - 1]->Ability(wAbility , ptTeam , ptEnemy );
 
                         if( k.end_game(ptTeam) || k.end_game(ptEnemy) )
                         {
@@ -221,7 +221,7 @@ int main()
         }
 
 
-        
+
         else if (command == "2")
         {
             cout << "game is end (:" << endl;

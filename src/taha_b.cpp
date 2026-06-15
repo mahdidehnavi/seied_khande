@@ -8,19 +8,19 @@ taha_b::taha_b() :Hero("Taha Bozorge" , "Attacker" , 500 , 4 , "<< This one was 
 {
 }
 
-void taha_b::ability1(int Energy)
+void taha_b::ability1(Hero* ptTeam[] , Hero* ptEnemy[])
 {
-    cout << "\nability1 taha bo \n";
+
 }
 
-void taha_b::ability2(int Energy)    
+void taha_b::ability2(Hero* ptTeam[] , Hero* ptEnemy[])    
 {
-    cout << "\nability2 taha bo \n";
+
 }
     
-void taha_b::special_ablity(int Energy)
+void taha_b::special_ablity(Hero* ptTeam[] , Hero* ptEnemy[])
 {
-    cout << "\nspecial ability taha bo\n";
+    
 }
 
 void taha_b::choice_ability() 

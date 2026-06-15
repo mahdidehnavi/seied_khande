@@ -8,19 +8,19 @@ Dr_white::Dr_white() :Hero("Doctor White" , "Healer" , 550 , 4 , "<< Bring it to
 {
 }
 
-void Dr_white::ability1(int Energy)
+void Dr_white::ability1(Hero* ptTeam[] , Hero* ptEnemy[])
 {
-    cout << "\nability3 Dr White \n";
+    
 } 
     
-void Dr_white::ability2(int Energy)
+void Dr_white::ability2(Hero* ptTeam[] , Hero* ptEnemy[])
 {
-    cout << "\nability2 Dr White \n";
+    
 }
     
-void Dr_white::special_ablity(int Energy)
+void Dr_white::special_ablity(Hero* ptTeam[] , Hero* ptEnemy[])
 {
-    cout << "\nspecial ability Dr White\n";
+
 }
     
 void Dr_white::choice_ability() 

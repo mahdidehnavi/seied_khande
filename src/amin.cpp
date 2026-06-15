@@ -8,19 +8,19 @@ amin::amin() :Hero("Amin emini" , "Attacker" , 500 , 3 , "<< One.. Two.. Three..
 {
 }
 
-void amin::ability1(int Energy)
+void amin::ability1(Hero* ptTeam[] , Hero* ptEnemy[])
 {
-    cout << "\nability 1 amin \n";
+   
 }
     
-void amin::ability2(int Energy)
+void amin::ability2(Hero* ptTeam[] , Hero* ptEnemy[])
 {
-    cout << "\nability 2 amin \n";
+    
 }
 
-void amin::special_ablity(int Energy)
+void amin::special_ablity(Hero* ptTeam[] , Hero* ptEnemy[])
 {
-    cout << "\nspecial ability amin\n";
+    
 }
 
 void amin::choice_ability() 

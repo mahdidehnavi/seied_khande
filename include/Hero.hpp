@@ -17,10 +17,10 @@ protected:
     int enrSpecAbility;
 public:
     Hero(std::string n, std::string ro , int h , int rage , std::string AngMas, int enerA1 , int enerA2 , int enerspac);
-    void Ability(int wAbility , int Energy); 
-    virtual void ability1(int Energy) = 0; 
-    virtual void ability2(int Energy) = 0;
-    virtual void special_ablity(int Energy) = 0;
+    void Ability(int wAbility , Hero* ptTeam[] ,Hero* ptEnemy[]); 
+    virtual void ability1(Hero* ptTeam[] , Hero* ptEnemy[]) = 0; 
+    virtual void ability2(Hero* ptTeam[] , Hero* ptEnemy[]) = 0;
+    virtual void special_ablity(Hero* ptTeam[] , Hero* ptEnemy[]) = 0;
     virtual void choice_ability() = 0;
     void takedamage(const int dmg);
     void heal(const int);
