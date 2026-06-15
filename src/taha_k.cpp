@@ -12,7 +12,6 @@ void taha_k::ability1(Hero* ptTeam[] , Hero* ptEnemy[])
 {
     cout << "\n   > Heal 40 HP to a random teammate & deal 40 damage to enemy" << endl;
 
-    
 }
 
 void taha_k::ability2(Hero* ptTeam[] , Hero* ptEnemy[]) 

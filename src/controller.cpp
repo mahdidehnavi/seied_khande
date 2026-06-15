@@ -409,11 +409,6 @@ bool controller::end_game(Hero* ptrteam[]) const  //پایان بازی
 }
 
 
-
-
-
-
-
 int controller::get_number() const
 {
     return number;
