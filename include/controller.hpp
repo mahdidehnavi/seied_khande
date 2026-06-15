@@ -20,7 +20,6 @@ public:
     void choice_heros(std::vector<int>& team ,const std::string& teamName,Hero* ptrteam[]);
     void Enemy_Ability(std::vector<int>& team , Hero* ptrteam[]);
     void start_action(std::vector<int>& team, const std::string& teamName);
-    void choice_ability(std::vector<int>& team, const std::string& teamName, int& Energy);
     bool end_game(Hero* ptrteam[]) const;
     int get_number() const;
     ~controller();

@@ -39,14 +39,14 @@ int main()
         
         if (command == "1")
         {
-            Hero* ptrTeamA[3];
+            Hero* ptrTeamA[3];//برای اطلعات بازیکنان  که به بازیکن اشاره می کردند 
             Hero* ptrTeamB[3];
             
             k.show_hero();
             cout << teamA_name << endl ;
             k.teamA.clear();
             k.choice_heros(k.teamA, teamA_name , ptrTeamA);    
-                        
+                         
             k.show_hero();
             cout << teamB_name << endl ;
             k.teamB.clear();
@@ -76,7 +76,7 @@ int main()
                             ptTeam[i] = ptrTeamA[i];    
                             ptEnemy[i] = ptrTeamB[i];    
                             team.push_back(k.teamA[i]); 
-                            Enemy.push_back(k.teamA[i]);                       
+                            Enemy.push_back(k.teamB[i]);                       
                         }
                         
                     } 
@@ -89,7 +89,7 @@ int main()
                             ptTeam[i] = ptrTeamB[i];
                             ptEnemy[i] = ptrTeamA[i];    
                             team.push_back(k.teamB[i]);          
-                            Enemy.push_back(k.teamB[i]);                       
+                            Enemy.push_back(k.teamA[i]);                       
                         }
                         
                     }   
@@ -99,7 +99,7 @@ int main()
                     int wHero;
                     int wAbility;
                     while(energy > 0)
-                    {
+                    {                     
                         cout << "═══════════════════════════════════════════════════════════════════════════ \n";
                         cout << "              " << team_name << " TURN    { Energy : " << energy << " }" << endl;
                         for(int i = 0 ; i < 3 ; i++){
@@ -198,7 +198,7 @@ int main()
 
                         energy -= ptTeam[wHero -1]->get_enerAbility(wAbility);
 
-                        ptTeam[wHero - 1]->Ability(wAbility , energy);
+                        ptTeam[wHero - 1]->Ability(wAbility , energy );
 
                         if( k.end_game(ptTeam) || k.end_game(ptEnemy) )
                         {

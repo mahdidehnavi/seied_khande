@@ -10,7 +10,8 @@ taha_k::taha_k() :Hero("Taha kochike" , "Healer" , 500 , 3 , "<< All in their pl
 
 void taha_k::ability1(int Energy) 
 {
-    cout << "\nability1 taha ko \n";
+    cout << "\n   > Heal 40 HP to a random teammate & deal 40 damage to enemy" << endl;
+
 }
 
 void taha_k::ability2(int Energy) 
