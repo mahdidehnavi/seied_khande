@@ -10,9 +10,9 @@ taha_k::taha_k() :Hero("Taha kochike" , "Healer" , 500 , 3 , "<< All in their pl
 
 void taha_k::ability1(Hero* ptTeam[] , Hero* ptEnemy[]) 
 {
-    cout << "\n   > Heal 40 HP to a random teammate & deal 40 damage to enemy" << endl;
+    cout << "\n> Heal 20 HP to a random teammate & deal 30 damage to enemy" << endl;
     int hp;
-    int min_hp ;
+    int min_hp = 600;
     int min_player;
     for (int i = 0; i < 3; i++)
     {
@@ -27,25 +27,39 @@ void taha_k::ability1(Hero* ptTeam[] , Hero* ptEnemy[])
     ptTeam[min_player]->heal(20);
     
     int enemy;
-    cout << "choose a player to damage(1-3): ";
+    cout << "Select a target to deal 30 damage(1-3): ";
     cin >> enemy;
-    for(enemy < 0 || enemy > 3){
-        cout << "\nEnter correct number(1-3): ";
-        cin >> enemy;
+    while(enemy < 0 || enemy > 3 || !ptEnemy[enemy]->checkalive())
+    {
+        if(enemy < 0 || enemy > 3)
+        {
+            cout << "\nEnter correct number(1-3): ";
+            cin >> enemy;
+        }
+        if(!ptEnemy[enemy]->checkalive())
+        {
+            cout << "\nSelect a living target: ";
+            cin >> enemy;
+        }
     }
     ptEnemy[enemy]->takedamage(30);
 
+    cout << "\n20 HP restored to " << ptTeam[min_player]->get_name() << endl;
+    cout << ptEnemy[enemy]->get_name() << "took 30 damage." << endl;
 }
+
 
 void taha_k::ability2(Hero* ptTeam[] , Hero* ptEnemy[]) 
 {
 
 }
 
+
 void taha_k::special_ablity(Hero* ptTeam[] , Hero* ptEnemy[]) 
 {
 
 }
+
 
 void taha_k::choice_ability() 
 {
