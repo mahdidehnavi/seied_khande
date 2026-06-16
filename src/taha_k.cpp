@@ -29,7 +29,7 @@ void taha_k::ability1(Hero* ptTeam[] , Hero* ptEnemy[])
     int enemy;
     cout << "choose a player to damage(1-3): ";
     cin >> enemy;
-    if(enemy < 0 || enemy > 3)
+    while(enemy < 0 || enemy > 3)
     {
         cout << "\nEnter correct number(1-3): ";
         cin >> enemy;
