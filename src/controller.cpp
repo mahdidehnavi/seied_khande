@@ -265,13 +265,14 @@ void controller::useEnergy(int& Energy , int amount) //استفاده از ان�
 
 bool controller::end_game(Hero* ptrteam[]) const  //پایان بازی
 {
-    if(ptrteam[0]->checkalive() || ptrteam[1]->checkalive() || ptrteam[2]->checkalive())
-    {
-        return false;
-    } 
-    else 
+
+    if(!ptrteam[0]->checkalive() && !ptrteam[1]->checkalive() && !ptrteam[2]->checkalive())
     {
         return true; //end game 
+    } 
+    else
+    {
+        return false;
     }
 }
 

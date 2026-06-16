@@ -15,7 +15,8 @@ protected:
     int enrAbility1;
     int enrAbility2;
     int enrSpecAbility;
-    bool check = false;
+    bool check = false ;
+
 public:
     Hero(std::string n, std::string ro , int h , int rage , std::string AngMas, int enerA1 , int enerA2 , int enerspac);
     void Ability(int wAbility , Hero* ptTeam[] ,Hero* ptEnemy[]); 

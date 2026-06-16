@@ -48,16 +48,48 @@ void taha_k::ability1(Hero* ptTeam[] , Hero* ptEnemy[])
 
     cout << "\n20 HP restored to " << ptTeam[min_player]->get_name() << endl;
     cout << ptEnemy[enemy - 1]->get_name() << "took 30 damage." << endl;
-
+    
 }
 
 void taha_k::ability2(Hero* ptTeam[] , Hero* ptEnemy[]) 
 {
-    cout << "\nTaha Kochike Ability 2: BLOOD SERUM" << endl;
-    cout << "   > Heal a teammate for 40 HP for 2 rounds" << endl;
+    static int round ;
+    if (!check)
+    {
+        cout << "\nTaha Kochike Ability 2: BLOOD SERUM" << endl;
+        cout << "   > Heal a teammate for 40 HP for 2 rounds" << endl;
+        
+        round = 1+ rand() % 3 ;
+        
+        while(round < 1 || round > 3 || !ptEnemy[round - 1]->checkalive())
+        {
+            if(round < 1 || round > 3)
+            {
+                cout << "\nEnter correct number(1-3): ";
+                cin >> round;
+            }
+            if(!ptEnemy[round -1]->checkalive())
+            {
+                cout << "\nSelect a living target: ";
+                cin >> round;
+            }
+        }
+        
+        ptTeam[round - 1]->heal(40);
+        
+        cout << "\n40 HP restored to " << ptTeam[round - 1]->get_name() << endl;
 
+        check = true ;
+    }
+    else
+    {
+        ptTeam[round - 1]->heal(40);
 
+        cout << "\n40 HP restored to " << ptTeam[round - 1]->get_name() << endl;
 
+        check = false ;
+    }
+    
 }
 
 
@@ -69,8 +101,23 @@ void taha_k::special_ablity(Hero* ptTeam[] , Hero* ptEnemy[])
 
     cout << "\n🔥" << Angry_massage << "🔥" << endl;
 
+    int hp;
+    int min_hp = 600;
+    int min_player;
+    for (int i = 0; i < 3; i++)
+    {
+        hp = ptTeam[i]->get_hp();
+        if (min_hp >= hp && hp != 0)
+        {
+            min_hp = hp ;
+            min_player = i ;
+        }
+        
+    }
+    ptTeam[min_player]->heal(200);
 
-    
+    cout << "\n20 HP restored to " << ptTeam[min_player]->get_name() << endl;
+ 
 }
 
 

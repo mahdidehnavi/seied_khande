@@ -198,10 +198,27 @@ int main()
 
                         energy -= ptTeam[wHero -1]->get_enerAbility(wAbility);
 
+
                         ptTeam[wHero - 1]->Ability(wAbility , ptTeam ,  ptEnemy );
 
-                        if( k.end_game(ptTeam) || k.end_game(ptEnemy) )
+
+
+                        if( k.end_game(ptTeam) && k.end_game(ptEnemy) )
                         {
+                            cout << "\n\n🤝The game ended in a draw!";
+                            cout << "\n🏁 Game Over!";
+                            return 0;
+                        }
+                        else if ( k.end_game(ptTeam) )
+                        {
+                            cout << "\n\n🏆 Team " << team_name << " wins the game!";
+                            cout << "\n🏁 Game Over!";
+                            return 0;
+                        }
+                        else if ( k.end_game(ptEnemy) )
+                        {
+                            cout << "\n\n🏆 Team " << Enemy_name << " wins the game!";
+                            cout << "\n🏁 Game Over!";
                             return 0;
                         }
 
@@ -219,9 +236,6 @@ int main()
                 round++;
             }
         }
-
-
-
         else if (command == "2")
         {
             cout << "game is end (:" << endl;
