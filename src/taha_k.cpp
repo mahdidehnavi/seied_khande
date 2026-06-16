@@ -53,8 +53,35 @@ void taha_k::ability1(Hero* ptTeam[] , Hero* ptEnemy[])
 
 void taha_k::ability2(Hero* ptTeam[] , Hero* ptEnemy[]) 
 {
-    cout << "\nTaha Kochike Ability 2: BLOOD SERUM" << endl;
-    cout << "   > Heal a teammate for 40 HP for 2 rounds" << endl;
+    static int round ;
+    if (!check)
+    {
+        cout << "\nTaha Kochike Ability 2: BLOOD SERUM" << endl;
+        cout << "   > Heal a teammate for 40 HP for 2 rounds" << endl;
+        round = 1+ rand() % 3 ;
+        ptTeam[round - 1]->heal(40);
+            while(round < 1 || round > 3 || !ptEnemy[round - 1]->checkalive())
+        {
+            if(round < 1 || round > 3)
+            {
+                cout << "\nEnter correct number(1-3): ";
+                cin >> round;
+            }
+            if(!ptEnemy[round -1]->checkalive())
+            {
+                cout << "\nSelect a living target: ";
+                cin >> round;
+            }
+        }
+        check = true ;
+    }
+    else
+    {
+        ptTeam[round - 1]->heal(40);
+        check = false ;
+    }
+    
+
 
 
 
