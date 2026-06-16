@@ -2,8 +2,7 @@
 ## Authors
 
 - [@mahdidehnavi](https://www.github.com/mahdidehnavi)
-- [@javadykazemlo
-](https://www.github.com/javadykazemlo)
+- [@javadykazemlo](https://www.github.com/javadykazemlo)
 
 ___
 
