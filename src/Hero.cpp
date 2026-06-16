@@ -138,6 +138,11 @@ int Hero::get_enerAbility(int wAbility) const
     }
 }
 
+bool Hero::get_check() const
+{
+    return check;
+}
+
 Hero::~Hero()
 {
 }
