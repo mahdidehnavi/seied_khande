@@ -15,7 +15,9 @@ protected:
     int enrAbility1;
     int enrAbility2;
     int enrSpecAbility;
-    bool check = false ;
+    bool check  ;
+    bool doping ;
+    int dopeRounds ;
 
 public:
     Hero(std::string n, std::string ro , int h , int rage , std::string AngMas, int enerA1 , int enerA2 , int enerspac);
@@ -39,6 +41,12 @@ public:
     int get_enrSpecAbility() const;
     int get_enerAbility(int) const;
     bool get_check() const;
+    void set_doping(int rounds);
+    void update_doping();
+    int get_damage_with_dope(int Damage) const;
+    int get_dopeRounds() const ;
+    bool get_doping() const; 
+
     ~Hero();
 };
 

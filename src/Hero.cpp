@@ -16,6 +16,10 @@ Hero::Hero(string n, string ro , int h ,int rage , string AngMas , int enerA1 , 
     enrAbility1 = enerA1;
     enrAbility2 = enerA2;
     enrSpecAbility = enerspac;
+
+
+    check = false ;
+    doping = false ;
 }
 
 void Hero::Ability(int wAbility,  Hero* ptTeam[] , Hero* ptEnemy[])
@@ -144,6 +148,44 @@ bool Hero::get_check() const
     return check ;
 }
 
+void Hero::set_doping(int rounds)
+{
+    doping = true;
+    dopeRounds = rounds ;
+}
+
+int  Hero::get_dopeRounds() const 
+{
+    return dopeRounds;
+}
+
+void Hero::update_doping()
+{
+    if (doping)
+    {
+        dopeRounds--;
+        if (dopeRounds <= 0)
+        {
+            doping = false;
+        }
+    }
+}
+
+int  Hero::get_damage_with_dope(int Damage) const
+{
+    if (doping)
+    {
+        return Damage + (Damage * 20 / 100);
+    }
+    return Damage;
+}
+
+
+
+bool Hero::get_doping() const
+{
+    return doping;
+}
 
 Hero::~Hero()
 {
