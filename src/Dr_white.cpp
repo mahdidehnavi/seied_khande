@@ -59,7 +59,6 @@ void Dr_white::ability2(Hero* ptTeam[] , Hero* ptEnemy[])
     {
         if(choose < 1 || choose > 3)
         {
-            cout << "This hero is dead!";
             cout << "\nEnter correct number(1-3): ";
             cin >> choose;
         }

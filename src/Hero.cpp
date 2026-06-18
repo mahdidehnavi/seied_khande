@@ -18,8 +18,10 @@ Hero::Hero(string n, string ro , int h ,int rage , string AngMas , int enerA1 , 
     enrSpecAbility = enerspac;
 
 
-    check = false ;
+    check  = false ;
     doping = false ;
+    ghofly = false ;
+
 }
 
 void Hero::Ability(int wAbility,  Hero* ptTeam[] , Hero* ptEnemy[])
@@ -185,6 +187,47 @@ int  Hero::get_damage_with_dope(int Damage) const
 bool Hero::get_doping() const
 {
     return doping;
+}
+
+void Hero::set_shielt(int shi)
+{
+    shield = shi ;
+}
+
+
+
+void Hero::update_ghofly()
+{
+    if (ghofly)
+    {
+        ghoflyRounds--;
+        if (ghoflyRounds <= 0)
+        {
+            ghofly = false;
+        }
+    }
+}
+int Hero::get_damage_with_ghofly(int damage) const
+{
+    if (ghofly)
+    {
+        return damage + (damage * 16 / 100);
+    }
+    return damage;
+}
+int Hero::get_ghoflyRounds() const 
+{
+    return ghoflyRounds;
+}
+bool Hero::get_ghofly() const
+{
+    return ghofly;
+
+}
+void Hero::set_ghofly(int rounds)
+{
+    ghofly = true;
+    ghoflyRounds = rounds ;  
 }
 
 Hero::~Hero()

@@ -17,7 +17,11 @@ protected:
     int enrSpecAbility;
     bool check  ;
     bool doping ;
+    bool ghofly ;
     int dopeRounds ;
+    int ghoflyRounds ;
+    int shield = 0 ;
+
 
 public:
     Hero(std::string n, std::string ro , int h , int rage , std::string AngMas, int enerA1 , int enerA2 , int enerspac);
@@ -46,6 +50,12 @@ public:
     int get_damage_with_dope(int Damage) const;
     int get_dopeRounds() const ;
     bool get_doping() const; 
+    void set_shielt(int shi);
+    void update_ghofly();
+    int get_damage_with_ghofly(int damage) const;
+    int get_ghoflyRounds() const ;
+    bool get_ghofly() const;
+    void set_ghofly(int rounds);
 
     ~Hero();
 };
