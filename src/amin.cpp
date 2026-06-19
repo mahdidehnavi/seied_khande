@@ -8,17 +8,12 @@ amin::amin() :Hero("Amin Emeni" , "Attacker" , 500 , 3 , "<< One.. Two.. Three..
 {
 }
 
-
-
 void amin::ability1(Hero* ptTeam[] , Hero* ptEnemy[])
 {
     cout << "\nAmin Emeni Ability 1: LAST BULLET" << endl;
     cout << "   > Deal 55 damage to enemy" << endl;
     cout << "   > If it kills the enemy, damage doubles (110)" << endl;
-<<<<<<< HEAD
     
-=======
->>>>>>> 870c826722aed29f8ebbe70b89ce505f60336cea
     int enemy;
     cout << "Select a target (1-3): ";
     cin >> enemy;

@@ -15,7 +15,11 @@ protected:
     int enrAbility1;
     int enrAbility2;
     int enrSpecAbility;
-    bool check  ;
+    bool check = false;
+    bool check2 = false;
+    bool joker = false;
+    int rnd = 0;
+    int rnd_end;
     bool doping ;
     bool ghofly ;
     int dopeRounds ;
@@ -30,7 +34,7 @@ public:
     virtual void ability2(Hero* ptTeam[] , Hero* ptEnemy[]) = 0;
     virtual void special_ablity(Hero* ptTeam[] , Hero* ptEnemy[]) = 0;
     virtual void choice_ability() = 0;
-    void takedamage(const int dmg);
+    virtual void takedamage(const int dmg);
     void heal(const int);
     bool checkalive() const;
     bool checkRage()const;
@@ -45,6 +49,11 @@ public:
     int get_enrSpecAbility() const;
     int get_enerAbility(int) const;
     bool get_check() const;
+    bool get_check2() const;
+    bool get_joker() const;
+    void check_rand(Hero* ptTeam[] , Hero* ptEnemy[]);
+    virtual void after_rnd(Hero* ptTeam[] , Hero* ptEnemy[]);
+
     void set_doping(int rounds);
     void update_doping();
     int get_damage_with_dope(int Damage) const;

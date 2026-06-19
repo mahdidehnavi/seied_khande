@@ -12,5 +12,6 @@ public:
     void ability2(Hero* ptTeam[] , Hero* ptEnemy[]) override;
     void special_ablity(Hero* ptTeam[] , Hero* ptEnemy[]) override;
     void choice_ability() override;
+    void takedamage(const int dmg) override;
     ~taha_b();
 };

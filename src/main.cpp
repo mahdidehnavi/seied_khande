@@ -78,8 +78,12 @@ int main()
                             team.push_back(k.teamA[i]); 
                             Enemy.push_back(k.teamB[i]);                       
                         }
-                        
-                    } 
+
+                        for(int i = 0 ; i < 3 ; i++)
+                        {
+                           ptTeam[i]->check_rand(ptTeam ,  ptEnemy);
+                        }
+                    }
                     else  // team B
                     {
                         team_name = teamB_name;
@@ -92,12 +96,19 @@ int main()
                             Enemy.push_back(k.teamA[i]);                       
                         }
                         
+                        
+                        for(int i = 0 ; i < 3 ; i++)
+                        {
+                           ptTeam[i]->check_rand(ptTeam ,  ptEnemy);
+                        }
                     }   
                     int energy = k.Energy_level(round , j);
                     
                     bool use = false;
                     int wHero;
                     int wAbility;
+
+
                     while(energy > 0)
                     {                     
                         cout << "═══════════════════════════════════════════════════════════════════════════ \n";

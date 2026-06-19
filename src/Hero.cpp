@@ -43,14 +43,30 @@ void Hero::Ability(int wAbility,  Hero* ptTeam[] , Hero* ptEnemy[])
 
 void Hero::takedamage(const int dmg) // کم کردن جون از قهرمان
 {
-    Hp -= dmg;
-    if(Hp < 0) Hp = 0;
+    if(!joker)
+    {
+        Hp -= dmg;
+        if(Hp < 0) Hp = 0;
+    } 
+    else 
+    {
+        Hp += dmg;
+        if(Hp > MaxHp) Hp = MaxHp;
+    }
 }
 
 void Hero::heal(const int amount) // اضافه کردن جون به قهرمان
 {
-    Hp += amount;
-    if(Hp > MaxHp) Hp = MaxHp;
+    if(!joker)
+    {
+        Hp += amount;
+        if(Hp > MaxHp) Hp = MaxHp;
+    } 
+    else 
+    {
+        Hp -= amount;
+        if(Hp < 0) Hp = 0;
+    }
 }
 
 bool Hero::checkalive() const // چک کردن اینکه قهرمان زنده است یا نه
@@ -148,6 +164,37 @@ int Hero::get_enerAbility(int wAbility) const
 bool Hero::get_check() const
 {
     return check ;
+}
+
+bool Hero::get_check2() const
+{
+    return check2;
+}
+
+
+bool Hero::get_joker() const
+{
+    return joker;
+}
+
+void Hero::check_rand(Hero* ptTeam[] , Hero* ptEnemy[])
+{
+    if(check2 || joker)
+    {
+        rnd++;
+    }
+
+    if( rnd == rnd_end  )
+    {
+        rnd = 0;
+        joker = false;
+        check2 = false;
+        after_rnd(ptTeam , ptEnemy);
+    }
+}
+
+void Hero::after_rnd(Hero* ptTeam[] , Hero* ptEnemy[])
+{
 }
 
 void Hero::set_doping(int rounds)
