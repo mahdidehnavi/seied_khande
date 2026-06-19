@@ -13,7 +13,6 @@ void amin::ability1(Hero* ptTeam[] , Hero* ptEnemy[])
     cout << "\nAmin Emeni Ability 1: LAST BULLET" << endl;
     cout << "   > Deal 55 damage to enemy" << endl;
     cout << "   > If it kills the enemy, damage doubles (110)" << endl;
-    
     int enemy;
     cout << "Select a target (1-3): ";
     cin >> enemy;
