@@ -5,7 +5,7 @@
 class shahriar : public Hero
 {
 private:
-    
+    int rnd;
 public:
     shahriar();
     void ability1(Hero* ptTeam[] , Hero* ptEnemy[]) override; 

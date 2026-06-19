@@ -28,67 +28,65 @@ void taha_k::ability1(Hero* ptTeam[] , Hero* ptEnemy[])
     }
     ptTeam[min_player]->heal(20);
     
-    int enemy;
-    cout << "Select a target to deal 30 damage(1-3): ";
-    cin >> enemy;
-    while(enemy < 1 || enemy > 3 || !ptEnemy[enemy - 1]->checkalive())
-    {
-        if(enemy < 1 || enemy > 3)
-        {
-            cout << "\nEnter correct number(1-3): ";
-            cin >> enemy;
-        }
-        if(!ptEnemy[enemy -1]->checkalive())
-        {
-            cout << "\nSelect a living target: ";
-            cin >> enemy;
-        }
-    }
-    ptEnemy[enemy - 1]->takedamage(30);
 
-    cout << "\n20 HP restored to " << ptTeam[min_player]->get_name() << endl;
-    cout << ptEnemy[enemy - 1]->get_name() << "took 30 damage." << endl;
+    bool checkTarget = false;
+
+    for(int i = 0; i < 3; i++)
+    {
+        if(ptEnemy[i]->checkalive()) 
+        checkTarget = true;
+    }
+
+    if(checkTarget)
+    {
+        int enemy;
+        cout << "Select a target to deal 30 damage(1-3): ";
+        cin >> enemy;
+        while(enemy < 1 || enemy > 3 || !ptEnemy[enemy - 1]->checkalive())
+        {
+            if(enemy < 1 || enemy > 3)
+            {
+                cout << "\nEnter correct number(1-3): ";
+                cin >> enemy;
+            }
+            if(!ptEnemy[enemy -1]->checkalive())
+            {
+                cout << "\nSelect a living target: ";
+                cin >> enemy;
+            }
+        }
+        ptEnemy[enemy - 1]->takedamage(30);
+    
+        cout << "\n20 HP restored to " << ptTeam[min_player]->get_name() << endl;
+        cout << ptEnemy[enemy - 1]->get_name() << "took 30 damage." << endl;
+
+    } else {
+        cout << "\n❌ No valid targets available." << endl;
+
+    }
+
     
 }
 
 void taha_k::ability2(Hero* ptTeam[] , Hero* ptEnemy[]) 
 {
-    static int round ;
-    if (!check)
+    cout << "\nTaha Kochike Ability 2: BLOOD SERUM" << endl;
+    cout << "   > Heal a teammate for 40 HP for 2 rounds" << endl;
+    
+    round = rand() % 3 ;
+    
+    while(!ptEnemy[round]->checkalive())
     {
-        cout << "\nTaha Kochike Ability 2: BLOOD SERUM" << endl;
-        cout << "   > Heal a teammate for 40 HP for 2 rounds" << endl;
-        
-        round = 1+ rand() % 3 ;
-        
-        while(round < 1 || round > 3 || !ptEnemy[round - 1]->checkalive())
-        {
-            if(round < 1 || round > 3)
-            {
-                cout << "\nEnter correct number(1-3): ";
-                cin >> round;
-            }
-            if(!ptEnemy[round -1]->checkalive())
-            {
-                cout << "\nSelect a living target: ";
-                cin >> round;
-            }
-        }
-        
-        ptTeam[round - 1]->heal(40);
-        
-        cout << "\n40 HP restored to " << ptTeam[round - 1]->get_name() << endl;
-
-        check = true ;
+        round = rand() % 3 ;
     }
-    else
-    {
-        ptTeam[round - 1]->heal(40);
+    
+    ptTeam[round]->heal(40);
+    
+    cout << "\n40 HP restored to " << ptTeam[round]->get_name() << endl;
 
-        cout << "\n40 HP restored to " << ptTeam[round - 1]->get_name() << endl;
+    check2 = true ;
 
-        check = false ;
-    }
+    rnd_end = 1;
     
 }
 
@@ -138,6 +136,19 @@ void taha_k::choice_ability()
         cout << "❌ you can not use ❌" << endl;
     }
 }
+
+void taha_k::after_rnd(Hero* ptTeam[] , Hero* ptEnemy[])
+{
+
+    if(ptTeam[round]->checkalive())
+    {
+        ptTeam[round]->heal(40);
+
+        cout << "\n40 HP restored to " << ptTeam[round]->get_name() << endl;
+    }
+
+}
+
 
 taha_k::~taha_k()
 {
