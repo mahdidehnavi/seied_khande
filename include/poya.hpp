@@ -6,6 +6,7 @@ class poya : public Hero
 {
 private:
     int rnd;
+    int target;
 public:
     poya();
     void ability1(Hero* ptTeam[] , Hero* ptEnemy[]) override; 
@@ -13,6 +14,7 @@ public:
     void special_ablity(Hero* ptTeam[] , Hero* ptEnemy[]) override;
     void choice_ability() override;
     void after_rnd(Hero* ptTeam[] , Hero* ptEnemy[]) override;
-    void takedamage(const int dmg) override;
+    void check1(Hero* ptTeam[] , Hero* ptEnemy[])override;
+    void takedamage(int dmg) override;
     ~poya();
 };

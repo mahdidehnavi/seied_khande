@@ -53,14 +53,13 @@ void shahriar::ability1(Hero* ptTeam[] , Hero* ptEnemy[])
         }
         if(randomN >= 2 && randomN <= 5) //80%
         {
-            ptEnemy[enemy - 1]->takedamage(60);
-            cout << ptEnemy[enemy - 1]->get_name() << "took 30 damage." << endl;
-    
+            ptEnemy[enemy - 1]->takedamage(60);    
         }
        
         
     }     
-    else {
+    else 
+    {
         cout << "\n❌ No valid targets available." << endl;
     }    
 }
@@ -103,11 +102,10 @@ void shahriar::ability2(Hero* ptTeam[] , Hero* ptEnemy[])
     
         ptEnemy[round - 1]->takedamage(100);
     
-        cout << ptEnemy[round - 1]->get_name() << "took 100 damage." << endl;
-
         
     }     
-    else {
+    else 
+    {
         cout << "\n❌ No valid targets available." << endl;
     }    
     
@@ -118,7 +116,7 @@ void shahriar::ability2(Hero* ptTeam[] , Hero* ptEnemy[])
 void shahriar::special_ablity(Hero* ptTeam[] , Hero* ptEnemy[])
 {
 
-    cout << "\nAgha Shahriar Special Ability: WORLD INVERSION" << endl;
+    cout << "\nAgha Shahriar Special Ability: WORLD REVERSAL" << endl;
     cout << "   > For 2 turns, everything reverses:" << endl;
     cout << "   > Damage to enemy becomes healing" << endl;
     cout << "   > Healing to teammate becomes damage" << endl;
@@ -146,7 +144,9 @@ void shahriar::choice_ability()
     cout << " 3)✨ Special = WORLD INVERSION (8 Energy)";
     if(checkRage()){
         cout << "✅ you can use ✅" << endl;
-    } else {
+    } 
+    else 
+    {
         cout << "❌ you can not use ❌" << endl;
     }
 }

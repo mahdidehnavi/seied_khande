@@ -14,88 +14,114 @@ void dany_go::ability1(Hero* ptTeam[] , Hero* ptEnemy[])
     cout << "   > Deal 20 damage to an enemy" << endl;
     cout << "   > If repeated on same enemy, damage multiplies by 1.6x" << endl;
 
-    int enemy;
-    cout << "Enter correct number (1-3) ";
-    cin >> enemy;
-    
-    while(enemy < 1 || enemy > 3 || !ptEnemy[enemy - 1]->checkalive())
+    bool checkTarget = false;
+
+    for(int i = 0; i < 3; i++)
     {
-        if(enemy < 1 || enemy > 3)
-        {
-            cout << "Enter correct number (1-3): ";
-            cin >> enemy;
-        }
-        if(!ptEnemy[enemy - 1]->checkalive())
-        {
-            cout << "Select a living target (1-3): ";
-            cin >> enemy;
-        }
+        if(ptEnemy[i]->checkalive()) 
+        checkTarget = true;
     }
 
-    int damage = 20;
-    
-    if (ptEnemy[enemy - 1]->get_ghofly())
+    if(checkTarget)
     {
-        damage = 20 + (20 * 60 / 100);  
-        cout << "\n Repeated on " << ptEnemy[enemy - 1]->get_name() << "! Damage = 32 (1.6x)!" << endl;
-    }
-    else
+        int enemy;
+        cout << "Enter correct number (1-3) ";
+        cin >> enemy;
+        
+        while(enemy < 1 || enemy > 3 || !ptEnemy[enemy - 1]->checkalive())
+        {
+            if(enemy < 1 || enemy > 3)
+            {
+                cout << "Enter correct number (1-3): ";
+                cin >> enemy;
+            }
+            if(!ptEnemy[enemy - 1]->checkalive())
+            {
+                cout << "Select a living target (1-3): ";
+                cin >> enemy;
+            }
+        }
+    
+        int damage = ptEnemy[enemy - 1]->get_ghofly();
+        
+        if (damage != 0)
+        {
+            damage = damage * 1.6;  
+    
+            cout << "\n Repeated on " << ptEnemy[enemy - 1]->get_name() << "! Damage = " << damage << endl;
+        }
+        else
+        {
+            ptEnemy[enemy - 1]->set_ghofly(damage);
+        }
+    
+        ptEnemy[enemy - 1]->takedamage(damage);
+        cout << "   > Remaining HP: " << ptEnemy[enemy - 1]->get_hp() << endl;
+        
+    } 
+    else 
     {
-        cout << "\n" << ptEnemy[enemy - 1]->get_name() << " took 20 damage!" << endl;
-        ptEnemy[enemy - 1]->set_ghofly(2);
+        cout << "\n❌ No valid targets available." << endl;
+        
     }
-    
-    ptEnemy[enemy - 1]->takedamage(damage);
-    cout << "   > Remaining HP: " << ptEnemy[enemy - 1]->get_hp() << endl;
-
-    
 }
+
 
 void dany_go::ability2(Hero* ptTeam[] , Hero* ptEnemy[])
 {
     cout << "\nDanny Golang Ability 2: ELEPHANT KILLER" << endl;
     cout << "   > Deal 50 damage to target & 50 damage to enemy with highest HP" << endl;
 
-    int enemy;
-    cout << "Enter correct number (1-3) ";
-    cin >> enemy;
-    
-    while(enemy < 1 || enemy > 3 || !ptEnemy[enemy - 1]->checkalive())
+    bool checkTarget = false;
+
+    for(int i = 0; i < 3; i++)
     {
-        if(enemy < 1 || enemy > 3)
-        {
-            cout << "Enter correct number (1-3): ";
-            cin >> enemy;
-        }
-        if(!ptEnemy[enemy - 1]->checkalive())
-        {
-            cout << "Select a living target (1-3): ";
-            cin >> enemy;
-        }
+        if(ptEnemy[i]->checkalive()) 
+        checkTarget = true;
     }
-    
-    ptEnemy[enemy - 1]->takedamage(50);
-    cout << "💥 " << ptEnemy[enemy - 1]->get_name() << " took 50 damage!" << endl;
-    
-    int k = 0;
-    for (int i = 1; i < 3; i++)
+
+    if(checkTarget)
     {
-        if (ptEnemy[i]->get_hp() > ptEnemy[k]->get_hp())
+        int enemy;
+        cout << "Enter correct number (1-3) ";
+        cin >> enemy;
+        
+        while(enemy < 1 || enemy > 3 || !ptEnemy[enemy - 1]->checkalive())
         {
-            k = i;
+            if(enemy < 1 || enemy > 3)
+            {
+                cout << "Enter correct number (1-3): ";
+                cin >> enemy;
+            }
+            if(!ptEnemy[enemy - 1]->checkalive())
+            {
+                cout << "Select a living target (1-3): ";
+                cin >> enemy;
+            }
         }
-    }
-    
-    if (k != enemy - 1)
-    {
+        
+        ptEnemy[enemy - 1]->takedamage(50);
+        
+        int k = 0;
+        for (int i = 1; i < 3; i++)
+        {
+            if (ptEnemy[i]->get_hp() > ptEnemy[k]->get_hp())
+            {
+                k = i;
+            }
+        }
+        
+        cout << endl << ptEnemy[k]->get_name() << " has the most Hp"; 
+
         ptEnemy[k]->takedamage(50);
-        cout << ptEnemy[k]->get_name() << " (highest HP) took 50 damage!" << endl;
-    }
-    else
+    } 
+    else 
     {
-        cout << " Target already had the highest HP! Already took damage." << endl;
+        cout << "\n❌ No valid targets available." << endl;
+        
     }
 }
+
 
 void dany_go::special_ablity(Hero* ptTeam[] , Hero* ptEnemy[])
 {
@@ -107,7 +133,6 @@ void dany_go::special_ablity(Hero* ptTeam[] , Hero* ptEnemy[])
 
     int hp;
     int min_hp = 600;
-    int min_player;
     for (int i = 0; i < 3; i++)
     {
         hp = ptTeam[i]->get_hp();
@@ -118,12 +143,16 @@ void dany_go::special_ablity(Hero* ptTeam[] , Hero* ptEnemy[])
         }
         
     }
-     rnd_end = 2;
+     
+    check2 = true;
+    rnd_end = 2;
 
-    ptTeam[min_player]->set_shielt(250) ;
+    ptTeam[min_player]->set_shield(250);
 
-    
+    to_get_rage = rageThreshold;
+   
 }
+
 
 void dany_go::choice_ability() 
 {
@@ -141,6 +170,13 @@ void dany_go::choice_ability()
     } else {
         cout << "❌ you can not use ❌" << endl;
     }
+}
+
+
+void dany_go::after_rnd(Hero* ptTeam[] , Hero* ptEnemy[])
+{
+    ptTeam[min_player]->set_shield(0);
+   
 }
 
 dany_go::~dany_go()

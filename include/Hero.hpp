@@ -19,14 +19,11 @@ protected:
     bool check2 = false;
     bool joker = false;
     int rnd = 0;
-    int rnd_end;
-    bool doping ;
-    bool ghofly ;
-    int dopeRounds ;
-    int ghoflyRounds ;
+    int rnd_end = 10;
+    bool doping = false;
+    int ghofly = 0;
     int shield = 0 ;
-
-
+    
 public:
     Hero(std::string n, std::string ro , int h , int rage , std::string AngMas, int enerA1 , int enerA2 , int enerspac);
     void Ability(int wAbility , Hero* ptTeam[] ,Hero* ptEnemy[]); 
@@ -34,11 +31,20 @@ public:
     virtual void ability2(Hero* ptTeam[] , Hero* ptEnemy[]) = 0;
     virtual void special_ablity(Hero* ptTeam[] , Hero* ptEnemy[]) = 0;
     virtual void choice_ability() = 0;
-    virtual void takedamage(const int dmg);
-    void heal(const int);
+    virtual void takedamage(int dmg);
+    void heal(int amount);
     bool checkalive() const;
     bool checkRage()const;
-    void apdateRageState(bool);
+    void apdateRageState();
+    void check_rand(Hero* ptTeam[] , Hero* ptEnemy[]);
+    virtual void after_rnd(Hero* ptTeam[] , Hero* ptEnemy[]);
+    virtual void check1(Hero* ptTeam[] , Hero* ptEnemy[]);
+
+    void set_hp(int);
+    void set_doping(bool dop);
+    void set_ghofly(int dmg);
+    void set_shield(int shi);
+
     std::string get_name() const;
     std::string get_role() const;
     int get_hp() const;
@@ -51,21 +57,8 @@ public:
     bool get_check() const;
     bool get_check2() const;
     bool get_joker() const;
-    void check_rand(Hero* ptTeam[] , Hero* ptEnemy[]);
-    virtual void after_rnd(Hero* ptTeam[] , Hero* ptEnemy[]);
-
-    void set_doping(int rounds);
-    void update_doping();
-    int get_damage_with_dope(int Damage) const;
-    int get_dopeRounds() const ;
     bool get_doping() const; 
-    void set_shielt(int shi);
-    void update_ghofly();
-    int get_damage_with_ghofly(int damage) const;
-    int get_ghoflyRounds() const ;
-    bool get_ghofly() const;
-    void set_ghofly(int rounds);
-
+    int get_ghofly() const;
     ~Hero();
 };
 

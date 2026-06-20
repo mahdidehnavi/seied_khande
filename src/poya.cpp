@@ -44,14 +44,11 @@ void poya::ability1(Hero* ptTeam[] , Hero* ptEnemy[])
                 }
             
                 ptEnemy[enemy - 1]->takedamage(40);
-                cout << ptEnemy[enemy - 1]->get_name() << " took 40 damage." << endl;
                 
                 
                 if (check)
                 {
-                    ptEnemy[enemy - 1]->takedamage(60);
-                    cout << ptEnemy[enemy - 1]->get_name() << " took 60 damage(for SCORPION & DAGGER)." << endl;
-        
+                    ptEnemy[enemy - 1]->takedamage(60);        
                     check = false;
                 }
                
@@ -73,59 +70,39 @@ void poya::ability2(Hero* ptTeam[] , Hero* ptEnemy[])
 {
     if(!check2)
     {
-        
-        static int enemy;
-        if(!check)
-        {
-            cout << "\npoya Kazhdom Ability 2: SCORPION" << endl;
-            cout << "   > Lock a scorpion on target, deals 20 damage each turn" << endl;
-            cout << "   > If dagger calls them, each scorpion deals 60 damage" << endl;
-        
-            bool checkTarget = false;
+        cout << "\npoya Kazhdom Ability 2: SCORPION" << endl;
+        cout << "   > Lock a scorpion on target, deals 20 damage each turn" << endl;
+        cout << "   > If dagger calls them, each scorpion deals 60 damage" << endl;
     
-            for(int i = 0; i < 3; i++)
-            {   
-                if(ptEnemy[i]->checkalive()) 
-                checkTarget = true;
-            }
-    
-            if(checkTarget)
-            {
-                cout << "Select a target to deal 30 damage(1-3): ";
-                cin >> enemy;
-                while(enemy < 1 || enemy > 3 || !ptEnemy[enemy - 1]->checkalive())
-                {
-                    if(enemy < 1 || enemy > 3)
-                    {
-                        cout << "\nEnter correct number(1-3): ";
-                        cin >> enemy;
-                    }
-                    if(!ptEnemy[enemy -1]->checkalive())
-                    {
-                        cout << "\nSelect a living target: ";
-                        cin >> enemy;
-                    }
-                }
-        
-                ptEnemy[enemy - 1]->takedamage(20);
-                cout << ptEnemy[enemy - 1]->get_name() << " will take 20 damage every hand." << endl;
-                cout << ptEnemy[enemy - 1]->get_name() << " took 20 damage." << endl;
-           
-            }     
-            else {
-                cout << "\n❌ No valid targets available." << endl;
-            }    
-            
+        bool checkTarget = false;
+
+        for(int i = 0; i < 3; i++)
+        {   
+            if(ptEnemy[i]->checkalive()) 
+            checkTarget = true;
         }
-        else
+
+        if(checkTarget)
         {
-            if(ptEnemy[enemy - 1]->get_hp() != 0)
+            cout << "Select a target to deal damage(1-3): ";
+            cin >> target;
+            while(target < 1 || target > 3 || !ptEnemy[target - 1]->checkalive())
             {
-                ptEnemy[enemy - 1]->takedamage(20);
-                cout << ptEnemy[enemy - 1]->get_name() << " took 20 damage." << endl;
-    
+                if(target < 1 || target > 3)
+                {
+                    cout << "\nEnter correct number(1-3): ";
+                    cin >> target;
+                }
+                if(!ptEnemy[target -1]->checkalive())
+                {
+                    cout << "\nSelect a living target: ";
+                    cin >> target;
+                }
             }
     
+            ptEnemy[target - 1]->takedamage(20);
+            cout << ptEnemy[target - 1]->get_name() << " will take 20 damage every hand." << endl; 
+            check = true;          
         }
     }
     else 
@@ -187,12 +164,22 @@ void poya::after_rnd(Hero* ptTeam[] , Hero* ptEnemy[])
     ptEnemy[round]->takedamage(450);
 }
 
+void poya::check1(Hero* ptTeam[] , Hero* ptEnemy[])
+{   
+    if(check)
+    {
+        if(ptEnemy[target - 1]->get_hp() != 0)
+        {
+            ptEnemy[target - 1]->takedamage(20);    
+        } 
+    }
+}
+
 void poya::takedamage(const int dmg)
 {
     if(!check2)
     {
-        Hp -= dmg;
-        if(Hp < 0) Hp = 0;
+        Hero::takedamage(dmg);
     }
     else {
         cout << endl << name << " is hidden." << endl;

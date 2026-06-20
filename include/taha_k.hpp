@@ -13,7 +13,6 @@ public:
     void special_ablity(Hero* ptTeam[] , Hero* ptEnemy[]) override;
     void choice_ability() override;
     void after_rnd(Hero* ptTeam[] , Hero* ptEnemy[]) override;
-
     ~taha_k();
 };
 

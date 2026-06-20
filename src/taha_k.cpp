@@ -56,17 +56,16 @@ void taha_k::ability1(Hero* ptTeam[] , Hero* ptEnemy[])
             }
         }
         ptEnemy[enemy - 1]->takedamage(30);
-    
-        cout << "\n20 HP restored to " << ptTeam[min_player]->get_name() << endl;
-        cout << ptEnemy[enemy - 1]->get_name() << "took 30 damage." << endl;
-
-    } else {
+            
+    } 
+    else 
+    {
         cout << "\n❌ No valid targets available." << endl;
-
+        
     }
-
-    
+        
 }
+
 
 void taha_k::ability2(Hero* ptTeam[] , Hero* ptEnemy[]) 
 {
@@ -82,8 +81,6 @@ void taha_k::ability2(Hero* ptTeam[] , Hero* ptEnemy[])
     
     ptTeam[round]->heal(40);
     
-    cout << "\n40 HP restored to " << ptTeam[round]->get_name() << endl;
-
     check2 = true ;
 
     rnd_end = 1;
@@ -114,8 +111,9 @@ void taha_k::special_ablity(Hero* ptTeam[] , Hero* ptEnemy[])
     }
     ptTeam[min_player]->heal(200);
 
-    cout << "\n20 HP restored to " << ptTeam[min_player]->get_name() << endl;
- 
+
+    to_get_rage = rageThreshold;
+
 }
 
 
@@ -137,14 +135,13 @@ void taha_k::choice_ability()
     }
 }
 
+
 void taha_k::after_rnd(Hero* ptTeam[] , Hero* ptEnemy[])
 {
 
     if(ptTeam[round]->checkalive())
     {
         ptTeam[round]->heal(40);
-
-        cout << "\n40 HP restored to " << ptTeam[round]->get_name() << endl;
     }
 
 }

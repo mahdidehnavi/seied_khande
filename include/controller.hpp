@@ -6,8 +6,6 @@
 class controller
 {
 private:
-
-    int number;
     int enegry;
 public:
     std::vector <int> teamA ;
@@ -20,7 +18,6 @@ public:
     int Energy_level(const int , const bool);
     void useEnergy(int& Energy ,const int amount);
     bool end_game(Hero* ptrteam[]) const;
-    int get_number() const;
     ~controller();
 };
 

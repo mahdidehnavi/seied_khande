@@ -8,6 +8,9 @@ using namespace std;
 #include "controller.hpp"
 #include "Hero.hpp"
 
+bool game_ending(Hero* ptTeam[] , Hero* ptEnemy[] , string team_name , string Enemy_name);
+
+
 int main()
 {
     cout << "════════════════════════════════════════════════════════════════════ \n";
@@ -39,7 +42,7 @@ int main()
         
         if (command == "1")
         {
-            Hero* ptrTeamA[3];//برای اطلعات بازیکنان  که به بازیکن اشاره می کردند 
+            Hero* ptrTeamA[3]; 
             Hero* ptrTeamB[3];
             
             k.show_hero();
@@ -58,7 +61,6 @@ int main()
             string Enemy_name;
             Hero* ptTeam[3];
             Hero* ptEnemy[3];
-            int namber;
             vector <int> team;
             vector <int> Enemy;
 
@@ -82,6 +84,11 @@ int main()
                         for(int i = 0 ; i < 3 ; i++)
                         {
                            ptTeam[i]->check_rand(ptTeam ,  ptEnemy);
+
+                           if(ptTeam[i]->get_name() == "poya Kazhdom" || ptTeam[i]->get_name() == "Taha Bozorge")
+                           {
+                                ptTeam[i]->check1(ptTeam ,  ptEnemy);
+                           }
                         }
                     }
                     else  // team B
@@ -95,24 +102,35 @@ int main()
                             team.push_back(k.teamB[i]);          
                             Enemy.push_back(k.teamA[i]);                       
                         }
-                        
-                        
+                         
                         for(int i = 0 ; i < 3 ; i++)
                         {
                            ptTeam[i]->check_rand(ptTeam ,  ptEnemy);
+
+                           if(ptTeam[i]->get_name() == "poya Kazhdom" || ptTeam[i]->get_name() == "Taha Bozorge")
+                           {
+                                ptTeam[i]->check1(ptTeam ,  ptEnemy);
+                           }
                         }
                     }   
                     int energy = k.Energy_level(round , j);
                     
-                    bool use = false;
                     int wHero;
                     int wAbility;
 
+                    game_ending(ptTeam , ptEnemy , team_name , Enemy_name);
 
                     while(energy > 0)
                     {                     
                         cout << "═══════════════════════════════════════════════════════════════════════════ \n";
-                        cout << "              " << team_name << " TURN    { Energy : " << energy << " }" << endl;
+                        if(j == 1)
+                        {
+                            cout << "              🟥" << team_name << " TURN🟥    { Energy : " << energy << " }" << endl;
+                        }
+                        else
+                        {
+                            cout << "              🟦" << team_name << " TURN🟦    { Energy : " << energy << " }" << endl;
+                        }
                         for(int i = 0 ; i < 3 ; i++){
                             cout << i+1 << ".";
                             ptTeam[i]->choice_ability();
@@ -202,10 +220,8 @@ int main()
                             cout << "⏭️ Turn Ended.\n";
                             break;
                         }
-                        
-                        if(wAbility == 3){
-                            use = true;
-                        }
+                    
+
 
                         energy -= ptTeam[wHero -1]->get_enerAbility(wAbility);
 
@@ -213,35 +229,16 @@ int main()
                         ptTeam[wHero - 1]->Ability(wAbility , ptTeam ,  ptEnemy );
 
 
-
-                        if( k.end_game(ptTeam) && k.end_game(ptEnemy) )
-                        {
-                            cout << "\n\n🤝The game ended in a draw!";
-                            cout << "\n🏁 Game Over!";
-                            return 0;
-                        }
-                        else if ( k.end_game(ptTeam) )
-                        {
-                            cout << "\n\n🏆 Team " << team_name << " wins the game!";
-                            cout << "\n🏁 Game Over!";
-                            return 0;
-                        }
-                        else if ( k.end_game(ptEnemy) )
-                        {
-                            cout << "\n\n🏆 Team " << Enemy_name << " wins the game!";
-                            cout << "\n🏁 Game Over!";
-                            return 0;
-                        }
-
-
+                        game_ending(ptTeam , ptEnemy , team_name , Enemy_name);
+                        
                     }
-
+                    
                     for(int i = 0 ; i < 3 ; i++){
-                        ptTeam[i]->apdateRageState(use);
+                        ptTeam[i]->apdateRageState();
                     }
                     team.clear();
                     Enemy.clear();
-
+                    
                 }
                 
                 round++;
@@ -252,8 +249,37 @@ int main()
             cout << "game is end (:" << endl;
             return 0;
         }
-    
-    
+        
+        
 
     return 0;
+}
+
+bool game_ending(Hero* ptTeam[] , Hero* ptEnemy[] , string team_name , string Enemy_name)
+{
+    controller d;
+
+    if( d.end_game(ptTeam) && d.end_game(ptEnemy) )
+    {
+        cout << "\n\n🤝The game ended in a draw!";
+        cout << "\n🏁 Game Over!";
+        return true;
+    }
+    else if ( d.end_game(ptTeam) )
+    {
+        cout << "\n\n🏆 Team " << team_name << " wins the game!";
+        cout << "\n🏁 Game Over!";
+        return true;
+    }
+    else if ( d.end_game(ptEnemy) )
+    {
+        cout << "\n\n🏆 Team " << Enemy_name << " wins the game!";
+        cout << "\n🏁 Game Over!";
+        return true;
+    }
+    else 
+    {
+        return false;
+    }
+
 }

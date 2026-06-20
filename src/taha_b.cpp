@@ -22,6 +22,7 @@ void taha_b::ability1(Hero* ptTeam[] , Hero* ptEnemy[])
 
 }
 
+
 void taha_b::ability2(Hero* ptTeam[] , Hero* ptEnemy[])    
 {
     
@@ -57,9 +58,7 @@ void taha_b::ability2(Hero* ptTeam[] , Hero* ptEnemy[])
         }
         ptEnemy[enemy - 1]->takedamage(90);
 
-        check2 = true;
-
-        rnd = 1;
+        check = true;
 
         cout << "\nTaha Bozorge is hidden for a round." << endl;
        
@@ -68,68 +67,51 @@ void taha_b::ability2(Hero* ptTeam[] , Hero* ptEnemy[])
         cout << "\n❌ No valid targets available." << endl;
     }
 
-   
-
-
 
 }
     
+
 void taha_b::special_ablity(Hero* ptTeam[] , Hero* ptEnemy[])
 {
-    static int round;   
-    if(!check2)
+
+    cout << "\nTaha Bozorge Special Ability: BROTHER'S REVENGE" << endl;
+    cout << "   > Mark a random enemy, next turn takes 360 damage" << endl;
+    cout << "   > If enemy HP < 360: dies, if HP > 360: takes 200 damage" << endl;
+    cout << "   > Cooldown: Once every 4 rounds" << endl;
+
+    cout << "\n🔥" << Angry_massage << "🔥" << endl;
+
+    bool checkTarget = false;
+
+    for(int i = 0; i < 3; i++)
     {
-        cout << "\nTaha Bozorge Special Ability: BROTHER'S REVENGE" << endl;
-        cout << "   > Mark a random enemy, next turn takes 360 damage" << endl;
-        cout << "   > If enemy HP < 360: dies, if HP > 360: takes 200 damage" << endl;
-        cout << "   > Cooldown: Once every 4 rounds" << endl;
-    
-        cout << "\n🔥" << Angry_massage << "🔥" << endl;
+        if(ptEnemy[i]->checkalive()) 
+        checkTarget = true;
+    }
 
-        bool checkTarget = false;
-
-        for(int i = 0; i < 3; i++)
-        {
-            if(ptEnemy[i]->checkalive()) 
-            checkTarget = true;
-        }
-
-        if(checkTarget)
+    if(checkTarget)
+    {
+        round = rand() % 3 ;
+        
+        while(!ptEnemy[round]->checkalive())
         {
             round = rand() % 3 ;
-            
-            while(!ptEnemy[round]->checkalive())
-            {
-                round = rand() % 3 ;
-            }
-    
-            cout << "\nIt well be done in the next round." << endl;
-    
-            check2 = true;
-        
-        }    
-        else {
-            cout << "\n❌ No valid targets available." << endl;
-        }
-    }
-    else
-    {
-        if(ptEnemy[round]->get_hp() > 360)
-        {
-            ptTeam[round]->takedamage(200);
-            cout << ptEnemy[round]->get_name() << "took 200 damage." << endl;
-            
-        } 
-        else if(ptEnemy[round]->get_hp() != 0)
-        {
-            ptTeam[round]->takedamage(360);
-            cout << ptEnemy[round]->get_name() << "took " << ptEnemy[round]->get_hp() << " damage." << endl;
-
         }
 
-        check2 = false;
+        cout << "\nIt well be done in the next round." << endl;
+
+        check2 = true;
+
+        rnd_end = 1;
+    
+    }    
+    else {
+        cout << "\n❌ No valid targets available." << endl;
     }
+    to_get_rage = rageThreshold;
+
 }
+
 
 void taha_b::choice_ability() 
 {
@@ -149,18 +131,41 @@ void taha_b::choice_ability()
     }
 }
 
-void taha_b::takedamage(const int dmg)
+
+void taha_b::after_rnd(Hero* ptTeam[] , Hero* ptEnemy[])
+{
+    cout << endl << "Taha Bozorge attacks!";
+    if(ptEnemy[round]->get_hp() > 360)
+    {
+        ptTeam[round]->takedamage(200);
+        
+    } 
+    else if(ptEnemy[round]->get_hp() != 0)
+    {
+        ptTeam[round]->takedamage(360);
+        
+    }
+}
+
+void taha_b::check1(Hero* ptTeam[] , Hero* ptEnemy[])
+{
+    if(check)
+    {
+        check = false;
+    }
+}
+
+
+void taha_b::takedamage(int dmg)
 {
     if(!check)
     {
-        Hp -= dmg;
-        if(Hp < 0) Hp = 0;
+        Hero::takedamage(dmg);
     }
     else {
         cout << endl << name << " is hidden." << endl;
     }
 }
-
 
 taha_b::~taha_b()
 {

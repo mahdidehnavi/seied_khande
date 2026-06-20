@@ -197,25 +197,25 @@ void controller::Enemy_Ability(std::vector<int>& team , Hero* ptrteam[])
 
 
 
-void controller::starting_team(string & A, string & B) //تعین تیم شروع کننده
+void controller::starting_team(string & A, string & B)
 {
     srand(time(nullptr));
     int random = rand() % 2;
     if(random == 0)
     {
-        cout << "\n<< " << A << " Team goes first! >>\n\n";
+        cout << "\n<<🟥 " << A << " Team goes first! >>\n\n";
     }
     else 
     {
         string help = A;
         A = B;
         B = help;
-        cout << "\n<< " << A << " Team goes first! >>\n\n";
+        cout << "\n<<🟥 " << A << " Team goes first! >>\n\n";
     }
 }
 
 
-int controller::Energy_level(const int round ,const bool t)  //تعین میزان انرژی
+int controller::Energy_level(const int round ,const bool t)
 {
     if(t) 
     {
@@ -252,7 +252,7 @@ int controller::Energy_level(const int round ,const bool t)  //تعین میزا
     }
 }
 
-void controller::useEnergy(int& Energy , int amount) //استفاده از انزژی
+void controller::useEnergy(int& Energy , int amount)
 {
     if(Energy >= amount) 
     {
@@ -263,23 +263,16 @@ void controller::useEnergy(int& Energy , int amount) //استفاده از ان�
 }
 
 
-bool controller::end_game(Hero* ptrteam[]) const  //پایان بازی
+bool controller::end_game(Hero* ptrteam[]) const
 {
-
     if(!ptrteam[0]->checkalive() && !ptrteam[1]->checkalive() && !ptrteam[2]->checkalive())
     {
-        return true; //end game 
-    } 
+        return true; //end game
+    }
     else
     {
         return false;
     }
-}
-
-
-int controller::get_number() const
-{
-    return number;
 }
 
 controller::~controller()

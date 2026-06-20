@@ -16,12 +16,6 @@ Hero::Hero(string n, string ro , int h ,int rage , string AngMas , int enerA1 , 
     enrAbility1 = enerA1;
     enrAbility2 = enerA2;
     enrSpecAbility = enerspac;
-
-
-    check  = false ;
-    doping = false ;
-    ghofly = false ;
-
 }
 
 void Hero::Ability(int wAbility,  Hero* ptTeam[] , Hero* ptEnemy[])
@@ -41,35 +35,77 @@ void Hero::Ability(int wAbility,  Hero* ptTeam[] , Hero* ptEnemy[])
 }
 
 
-void Hero::takedamage(const int dmg) // کم کردن جون از قهرمان
+void Hero::takedamage(int dmg) 
 {
+    if(doping)
+    {
+        dmg = dmg * 1.2;  
+    }
+
     if(!joker)
     {
-        Hp -= dmg;
-        if(Hp < 0) Hp = 0;
+        int dmg2 = dmg;
+        if(shield != 0)
+        {
+            int helpi = shield;
+            shield -= dmg;
+            dmg -= helpi;
+            if(dmg < 0) dmg = 0;
+
+            dmg2 -= dmg;
+
+            cout << "the shield took " << dmg2 << " damage." << endl;
+        }
+        
+        if(dmg != 0)
+        {
+            Hp -= dmg;
+            if(Hp < 0) Hp = 0;
+            cout << endl << name << " took " << dmg << " damage." << endl;
+        }
     } 
     else 
     {
         Hp += dmg;
         if(Hp > MaxHp) Hp = MaxHp;
+        cout << endl << " World reversal is active." << endl;
+        cout << dmg << " HP restored to " << name << endl;
     }
 }
 
-void Hero::heal(const int amount) // اضافه کردن جون به قهرمان
-{
-    if(!joker)
+void Hero::heal(int amount) 
+{    if(!joker)
     {
         Hp += amount;
         if(Hp > MaxHp) Hp = MaxHp;
+        cout << endl << amount << " HP restored to " << name << endl;
     } 
     else 
     {
-        Hp -= amount;
-        if(Hp < 0) Hp = 0;
+        int dmg2 = amount;
+        if(shield != 0)
+        {
+            int helpi = shield;
+            shield -= amount;
+            amount -= helpi;
+            if(amount < 0) amount = 0;
+
+            dmg2 -= amount;
+
+            cout << "the shield took " << dmg2 << " damage." << endl;
+        }
+        
+        if(amount != 0)
+        {
+            Hp -= amount;
+            if(Hp < 0) Hp = 0;
+            cout << endl << " World reversal is active." << endl;
+            cout << name << " took " << amount << " damage." << endl;
+        }
     }
 }
 
-bool Hero::checkalive() const // چک کردن اینکه قهرمان زنده است یا نه
+bool Hero::checkalive() const 
 {
     if(Hp == 0)
     {
@@ -80,7 +116,7 @@ bool Hero::checkalive() const // چک کردن اینکه قهرمان زنده 
     }
 }
 
-bool Hero::checkRage() const //برای چک کردن اینکه میشه از خشم استفاده کرد یانه
+bool Hero::checkRage() const
 {
     if(to_get_rage == 0){
         return true;
@@ -89,17 +125,61 @@ bool Hero::checkRage() const //برای چک کردن اینکه میشه از �
     }
 }
 
-void Hero::apdateRageState(bool use) //برای آپدیت وضعیت خشم
+void Hero::apdateRageState()
 {
-    if(use && to_get_rage == 0){
-        to_get_rage = rageThreshold;
-    } else {
-        if(to_get_rage != 0){
-            to_get_rage--;
-        }
+    if(to_get_rage != 0){
+        to_get_rage--;
     }
-
+    
 }
+
+void Hero::check_rand(Hero* ptTeam[] , Hero* ptEnemy[])
+{
+    if(check2 || joker)
+    {
+        rnd++;
+    }
+    
+    if( rnd == rnd_end  )
+    {
+        rnd = 0;
+        joker = false;
+        check2 = false;
+        after_rnd(ptTeam , ptEnemy);
+    }
+}
+
+void Hero::after_rnd(Hero* ptTeam[] , Hero* ptEnemy[])
+{
+}
+
+void Hero::check1(Hero* ptTeam[] , Hero* ptEnemy[])
+{   
+}
+
+
+
+void Hero::set_hp(int h)
+{
+    Hp = h;
+}
+
+void Hero::set_doping(bool dop)
+{
+    doping = dop;
+}
+
+void Hero::set_ghofly(int dmg)
+{
+    ghofly = dmg;  
+}
+
+void Hero::set_shield(int shi)
+{
+    shield = shi;
+}
+
+
 
 string Hero::get_name() const
 {
@@ -110,7 +190,7 @@ string Hero::get_role() const
 {
     return role;
 }
-    
+
 int Hero::get_hp() const
 {
     return Hp;
@@ -160,7 +240,6 @@ int Hero::get_enerAbility(int wAbility) const
     }
 }
 
-
 bool Hero::get_check() const
 {
     return check ;
@@ -171,111 +250,22 @@ bool Hero::get_check2() const
     return check2;
 }
 
-
 bool Hero::get_joker() const
 {
     return joker;
 }
-
-void Hero::check_rand(Hero* ptTeam[] , Hero* ptEnemy[])
-{
-    if(check2 || joker)
-    {
-        rnd++;
-    }
-
-    if( rnd == rnd_end  )
-    {
-        rnd = 0;
-        joker = false;
-        check2 = false;
-        after_rnd(ptTeam , ptEnemy);
-    }
-}
-
-void Hero::after_rnd(Hero* ptTeam[] , Hero* ptEnemy[])
-{
-}
-
-void Hero::set_doping(int rounds)
-{
-    doping = true;
-    dopeRounds = rounds ;
-}
-
-int  Hero::get_dopeRounds() const 
-{
-    return dopeRounds;
-}
-
-void Hero::update_doping()
-{
-    if (doping)
-    {
-        dopeRounds--;
-        if (dopeRounds <= 0)
-        {
-            doping = false;
-        }
-    }
-}
-
-int  Hero::get_damage_with_dope(int Damage) const
-{
-    if (doping)
-    {
-        return Damage + (Damage * 20 / 100);
-    }
-    return Damage;
-}
-
-
 
 bool Hero::get_doping() const
 {
     return doping;
 }
 
-void Hero::set_shielt(int shi)
-{
-    shield = shi ;
-}
-
-
-
-void Hero::update_ghofly()
-{
-    if (ghofly)
-    {
-        ghoflyRounds--;
-        if (ghoflyRounds <= 0)
-        {
-            ghofly = false;
-        }
-    }
-}
-int Hero::get_damage_with_ghofly(int damage) const
-{
-    if (ghofly)
-    {
-        return damage + (damage * 16 / 100);
-    }
-    return damage;
-}
-int Hero::get_ghoflyRounds() const 
-{
-    return ghoflyRounds;
-}
-bool Hero::get_ghofly() const
+int Hero::get_ghofly() const
 {
     return ghofly;
 
 }
-void Hero::set_ghofly(int rounds)
-{
-    ghofly = true;
-    ghoflyRounds = rounds ;  
-}
+
 
 Hero::~Hero()
 {
