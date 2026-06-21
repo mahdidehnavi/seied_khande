@@ -240,7 +240,7 @@ int Hero::get_enerAbility(int wAbility) const
         case 3:
             return get_enrSpecAbility();
             break;
-        default:
+        default: 
             return 0;
             break;
     }
