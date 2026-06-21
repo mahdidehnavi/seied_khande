@@ -62,6 +62,7 @@ void Hero::takedamage(int dmg)
             Hp -= dmg;
             if(Hp < 0) Hp = 0;
             cout << endl << name << " took " << dmg << " damage." << endl;
+            cout << "   ❤️ Remaining HP: " << Hp << " / " << MaxHp << endl;
         }
     } 
     else 
@@ -70,8 +71,11 @@ void Hero::takedamage(int dmg)
         if(Hp > MaxHp) Hp = MaxHp;
         cout << endl << " World reversal is active." << endl;
         cout << dmg << " HP restored to " << name << endl;
+        cout << "   ❤️ Remaining HP: " << Hp << " / " << MaxHp << endl;
     }
 }
+
+
 
 void Hero::heal(int amount) 
 {    if(!joker)
@@ -79,6 +83,7 @@ void Hero::heal(int amount)
         Hp += amount;
         if(Hp > MaxHp) Hp = MaxHp;
         cout << endl << amount << " HP restored to " << name << endl;
+        cout << "   ❤️ Current HP: " << Hp << " / " << MaxHp << endl;
     } 
     else 
     {
@@ -101,6 +106,7 @@ void Hero::heal(int amount)
             if(Hp < 0) Hp = 0;
             cout << endl << " World reversal is active." << endl;
             cout << name << " took " << amount << " damage." << endl;
+            cout << "   ❤️ Current HP: " << Hp << " / " << MaxHp << endl;
         }
     }
 }
